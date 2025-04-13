@@ -1,0 +1,6 @@
+#app {
+    width: 80%;
+    margin: 0 auto;
+    padding: 1em;
+    min-height: calc(100vh - 51px);
+}

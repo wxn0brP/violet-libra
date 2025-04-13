@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIOLET LIBRA <%= title %>
+    </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../js/cms/index.css">
+    <link rel="stylesheet" href="cms.css">
+    <link rel="stylesheet" href="cms-editor.css">
+    <link rel="stylesheet" href="cms-sidebar.css">
+    <link rel="shortcut icon" href="favicon-256.png" type="image/png">
+    <link rel="icon" href="favicon-256.png" type="image/png">
+</head>
+
+<body>
+    <textarea id="editor"></textarea>
+    <!-- <footer>
+        <p>Copyright © 2025 VIOLET LIBRA</p>
+    </footer> -->
+    <aside id="sidebar">
+        <label>
+            Name:
+            <input type="text" data-id="name">
+        </label>
+        <label>
+            Description:
+            <textarea data-id="description"></textarea>
+        </label>
+        <div>
+            Tags:
+            <div data-id="tags"></div>
+        </div>
+        <button data-id="save">Save</button>
+        <button data-id="delete">Delete</button>
+        <button data-id="load">Load</button>
+    </aside>
+    <script type="module" src="../js/cms/index.js"></script>
+</body>
+
+</html>

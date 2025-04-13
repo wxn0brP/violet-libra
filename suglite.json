@@ -1,0 +1,10 @@
+{
+    "cmd": "yarn build && node dist-back/index.js",
+    "watch": [
+        "back"
+    ],
+    "restart_cmd": "clear",
+    "events": {
+        "rs": "clear"
+    }
+}

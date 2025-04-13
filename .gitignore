@@ -1,0 +1,13 @@
+.vscode
+
+node_modules
+package-lock.json
+yarn.lock
+.suglite_history
+
+db
+.env
+
+dist-back
+dist
+data

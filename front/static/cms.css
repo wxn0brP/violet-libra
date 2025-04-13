@@ -1,0 +1,26 @@
+:root {
+    --color-primary: #d4d4d4;
+    --color-active: #2c3e50;
+    --color-background: var(--background-color);
+    --color-gutter: #282a36;
+    --color-linenumber: #6d8a88;
+    --color-selection: rgba(255, 255, 255, .1);
+    --color-comment: #6272a4;
+    --color-string: #f1fa8c;
+    --color-number: #bd93f9;
+    --color-variable: #50fa7b;
+    --color-operator: #ff79c6;
+    --color-atom: #bd93f9;
+    --color-meta: #f8f8f2;
+    --color-tag: #ff79c6;
+    --color-attribute: #50fa7b;
+    --color-property: #66d9ef;
+    --color-type: #ffb86c;
+    --color-activeline: rgba(255, 255, 255, .1);
+    --color-matchingbracket: #fff;
+}
+
+body {
+    padding-left: 320px;
+    padding-top: 10px;
+}

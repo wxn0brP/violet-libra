@@ -1,0 +1,35 @@
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100vh;
+    background-color: #282a36;
+    color: #f8f8f2;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#sidebar button {
+    margin-left: 5px;
+}
+
+#sidebar label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-direction: column;
+}
+
+#sidebar .list {
+    margin-top: 10px;
+}
+
+
+#sidebar .list li {
+    margin-top: 5px;
+}
+
+#sidebar .list select, #sidebar .list input {
+    width: 65%;
+}
