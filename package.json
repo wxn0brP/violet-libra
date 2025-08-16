@@ -21,7 +21,7 @@
         "cors": "^2.8.5",
         "dotenv": "^16.4.7",
         "ejs": "^3.1.10",
-        "express": "^4.21.2",
+        "express": "^5.0.0",
         "jose": "^6.0.10",
         "marked": "^15.0.7",
         "source-map-support": "^0.5.21"
