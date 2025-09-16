@@ -1,14 +1,7 @@
-import { cb_delete, cb_get_id, cb_update } from "./api/content.api";
 import { marked } from "marked";
 import { getMd, getMdList } from "./cms/content.cms";
 import { Router } from "@wxn0brp/falcon-frame";
 const router = new Router();
-
-const apiRouter = new Router();
-apiRouter.get("/md/:id", cb_get_id);
-apiRouter.post("/md", cb_update);
-apiRouter.delete("/md", cb_delete);
-router.use("/api", apiRouter);
 
 router.get("/", async (req, res) => {
     const listData = await getMdList();

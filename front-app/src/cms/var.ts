@@ -1,19 +1,18 @@
 import EasyMDE from "easymde";
-import { qt, qtd } from "../utils/qt";
 import createListController from "../utils/list";
 
-export const sidebar = qt("#sidebar");
+export const sidebar = qs("#sidebar");
 
 export const easyMDE = new EasyMDE({
     theme: "dark",
-    element: document.querySelector("#editor"),
+    element: qs("#editor"),
     spellChecker: true,
 });
-document.querySelector("#editor").remove();
+qs("#editor").remove();
 
-export const tagsListUl = qtd<HTMLUListElement>("tags", sidebar);
-export const nameInput = qtd<HTMLInputElement>("name", sidebar);
-export const descriptionInput = qtd<HTMLInputElement>("description", sidebar);
+export const tagsListUl = sidebar.qi<HTMLUListElement>("tags",);
+export const nameInput = sidebar.qi<HTMLInputElement>("name");
+export const descriptionInput = sidebar.qi<HTMLInputElement>("description");
 
 export const tagList = createListController(tagsListUl, {
     type: "mixed",
