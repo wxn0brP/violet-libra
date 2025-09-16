@@ -1,8 +1,7 @@
-import { Router } from "express";
 import { cb_delete, cb_get_id, cb_update } from "./api/content.api";
-import ejs from "ejs";
 import { marked } from "marked";
 import { getMd, getMdList } from "./cms/content.cms";
+import { Router } from "@wxn0brp/falcon-frame";
 const router = new Router();
 
 const apiRouter = new Router();
@@ -13,12 +12,12 @@ router.use("/api", apiRouter);
 
 router.get("/", async (req, res) => {
     const listData = await getMdList();
-    const list = await ejs.renderFile("front/ejs/list.ejs", { list: listData.map(item => item._id) });
-    res.render("index", { title: " | List", body: list });
+    const list = `<ul>${listData.map(item => `<li><a href="${item._id}">${item._id}</a></li>`).join("")}</ul>`
+    res.render("front/eng/index.html", { title: " | List", body: list });
 });
 
 router.get("/cms", (req, res) => {
-    res.render("cms/index", { title: " | Editor" });
+    res.render("front/eng/cms.html", { title: " | Editor" });
 });
 
 router.get("/:id", async (req, res, next) => {

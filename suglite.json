@@ -1,5 +1,5 @@
 {
-    "cmd": "yarn build && node dist-back/index.js",
+    "cmd": "tsc --noEmit && bun run back/index.ts",
     "watch": [
         "back"
     ],

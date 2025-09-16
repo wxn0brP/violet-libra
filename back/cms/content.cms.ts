@@ -21,7 +21,7 @@ export async function deleteMd(name: string) {
 }
 
 export async function getMd(name: string) {
-    const meta = await db.meta.findOne("md", { _id: name });
+    const meta = await db.meta.findOne<any>("md", { _id: name });
     if (!meta) return { err: true, msg: "not found" };
     const content = await readFile(mdPath + name + ".md", "utf-8");
     return { content, meta, err: false };

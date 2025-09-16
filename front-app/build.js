@@ -1,7 +1,7 @@
 import esbuild from "esbuild";
 
 esbuild.build({
-	entryPoints: [
+    entryPoints: [
         "src/cms/index.ts",
         "src/page/index.ts",
     ],
@@ -17,5 +17,5 @@ esbuild.build({
     keepNames: true,
     tsconfig: "tsconfig.json",
     logLevel: "info",
-	loader: { ".ts": "ts" }
+    loader: { ".ts": "ts" }
 });
