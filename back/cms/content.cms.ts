@@ -7,11 +7,8 @@ export async function addOrUpdateMd(name: string, content: string, tags: string[
     await writeFile(mdPath + name + ".md", content);
     await db.meta.updateOneOrAdd(
         "md",
-        { _id: name },
-        { u: Date.now(), tags, desc },
-        {},
-        {},
-        false
+        { name },
+        { name, tags, desc }
     );
 }
 
@@ -28,5 +25,5 @@ export async function getMd(name: string) {
 }
 
 export async function getMdList() {
-    return await db.meta.find("md", {}, {}, {}, { select: ["_id"] });
+    return await db.meta.find("md", {}, {}, { select: ["_id"] });
 }
