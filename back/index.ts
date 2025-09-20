@@ -4,6 +4,7 @@ import router from "./router";
 import FalconFrame from "@wxn0brp/falcon-frame";
 import { FF_VQL } from "@wxn0brp/vql";
 import VQL from "./api/vql";
+import { getUser } from "./api/getUser";
 dotenv.config({ quiet: true });
 sourceMap.install();
 
@@ -13,6 +14,6 @@ app.setVar("views", "front/eng")
 app.static("front/static");
 app.static("/js", "front-app/dist");
 app.use(router);
-FF_VQL(app, VQL);
+FF_VQL(app, VQL, { getUser });
 
 app.listen(15987, true);

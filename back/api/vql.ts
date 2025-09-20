@@ -1,7 +1,9 @@
 import VQLProcessor, { VQLConfig } from "@wxn0brp/vql";
 import db from "../cms/data.cms";
 import { apiAdapter } from "./api";
+import { accountAdapter } from "./account";
 import { resolver } from "./resolver";
+import { gw } from "../perm";
 
 const config = new VQLConfig({
     noCheckPermissions: false,
@@ -10,9 +12,14 @@ const config = new VQLConfig({
     hidePath: false
 });
 
-const VQL = new VQLProcessor({
-    ...db,
-    api: apiAdapter
-}, config, resolver.create());
+const VQL = new VQLProcessor(
+    {
+        ...db,
+        "api-cms-admin": apiAdapter,
+        "account": accountAdapter
+    },
+    config,
+    resolver.createWithGw(gw)
+);
 
 export default VQL;

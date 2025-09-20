@@ -18,6 +18,7 @@
     "dependencies": {
         "@wxn0brp/db": "^0.40.0",
         "@wxn0brp/falcon-frame": "^0.1.0",
+        "@wxn0brp/gate-warden": "^0.4.1",
         "@wxn0brp/vql": "^0.7.0",
         "dotenv": "^17.2.2",
         "jose": "^6.0.10",

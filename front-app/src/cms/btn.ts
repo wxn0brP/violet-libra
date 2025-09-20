@@ -19,7 +19,7 @@ sidebar.qi<HTMLButtonElement>("save").addEventListener("click", async () => {
     const desc = descriptionInput.value;
 
     const res = await fetchVQL({
-        db: "api",
+        db: "api-cms-admin",
         d: {
             updateOneOrAdd: {
                 collection: "md",
@@ -37,7 +37,7 @@ sidebar.qi<HTMLButtonElement>("delete").addEventListener("click", async () => {
         return;
     }
     const name = nameInput.value;
-    const res = await fetchVQL("api -md! s.id = $id", { id: name });
+    const res = await fetchVQL("api-cms-admin -md! s.id = $id", { id: name });
     alert(res ? "Deleted!" : "Not found");
 });
 
@@ -51,7 +51,7 @@ sidebar.qi<HTMLButtonElement>("load").addEventListener("click", async () => {
 });
 
 async function load(name: string) {
-    const data = await fetchVQL("api md! s.id = $id", { id: name });
+    const data = await fetchVQL("api-cms-admin md! s.id = $id", { id: name });
     if (!data) {
         alert("Not found");
         return;
@@ -75,7 +75,7 @@ nameSelect.addEventListener("change", () => {
 renderNameSelect();
 
 async function renderNameSelect() {
-    const list = await fetchVQL("api md s.id=0");
+    const list = await fetchVQL("api-cms-admin md s.id=0");
     const options = list.map((item) => `<option value="${item.name}">${item.name}</option>`);
     nameSelect.innerHTML = `<option value="">New</option>` + options.join("");
 }
