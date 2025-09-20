@@ -5,12 +5,12 @@ const router = new Router();
 
 router.get("/", async (req, res) => {
     const listData = await getMdList();
-    const list = `<ul>${listData.map(item => `<li><a href="${item._id}">${item._id}</a></li>`).join("")}</ul>`
-    res.render("front/eng/index.html", { title: " | List", body: list });
+    const list = `<ul>${listData.map(item => `<li><a href="${item.name}">${item.name}</a></li>`).join("")}</ul>`
+    res.render("index", { title: " | List", body: list });
 });
 
 router.get("/cms", (req, res) => {
-    res.render("front/eng/cms.html", { title: " | Editor" });
+    res.render("cms", { title: " | Editor" });
 });
 
 router.get("/:id", async (req, res, next) => {

@@ -1,5 +1,5 @@
 import { fetchVQL } from "@wxn0brp/vql-client";
-import { descriptionInput, easyMDE, nameInput, sidebar, tagList } from "./var";
+import { descriptionInput, easyMDE, nameInput, nameSelect, sidebar, tagList } from "./var";
 
 sidebar.qi<HTMLButtonElement>("save").addEventListener("click", async () => {
     if (!confirm("Are you sure you want to save?")) {
@@ -29,6 +29,7 @@ sidebar.qi<HTMLButtonElement>("save").addEventListener("click", async () => {
         }
     });
     alert(res ? "Saved!" : "Not found");
+    renderNameSelect();
 });
 
 sidebar.qi<HTMLButtonElement>("delete").addEventListener("click", async () => {
@@ -36,7 +37,7 @@ sidebar.qi<HTMLButtonElement>("delete").addEventListener("click", async () => {
         return;
     }
     const name = nameInput.value;
-    const res = await fetchVQL({ query: "api -md! s.id = $id", var: { id: name } });
+    const res = await fetchVQL("api -md! s.id = $id", { id: name });
     alert(res ? "Deleted!" : "Not found");
 });
 
@@ -46,13 +47,35 @@ sidebar.qi<HTMLButtonElement>("load").addEventListener("click", async () => {
         alert("Please enter a name");
         return;
     }
-    const data = await fetchVQL({ query: "api md! s.id = $id", var: { id: name } });
+    load(name);
+});
+
+async function load(name: string) {
+    const data = await fetchVQL("api md! s.id = $id", { id: name });
     if (!data) {
         alert("Not found");
         return;
     }
-
     easyMDE.value(data.content);
     if (data.tags) tagList.listController.setItems(data.tags.map((tag) => ({ value: tag, type: "input" })));
     descriptionInput.value = data.desc || "";
+}
+
+nameSelect.addEventListener("change", () => {
+    const name = nameSelect.value;
+    nameInput.value = name;
+    if (name) load(name);
+    else {
+        if (confirm("Are you sure you want to clear?")) {
+            easyMDE.value("");
+        }
+    }
 });
+
+renderNameSelect();
+
+async function renderNameSelect() {
+    const list = await fetchVQL("api md s.id=0");
+    const options = list.map((item) => `<option value="${item.name}">${item.name}</option>`);
+    nameSelect.innerHTML = `<option value="">New</option>` + options.join("");
+}

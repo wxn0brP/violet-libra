@@ -9,6 +9,7 @@ sourceMap.install();
 
 const app = new FalconFrame();
 
+app.setVar("views", "front/eng")
 app.static("front/static");
 app.static("/js", "front-app/dist");
 app.use(router);

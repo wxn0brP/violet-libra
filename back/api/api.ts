@@ -1,5 +1,6 @@
 import { AdapterBuilder } from "@wxn0brp/vql/apiAbstract";
 import { addOrUpdateMd, deleteMd, getMd } from "../cms/content.cms";
+import db from "../cms/data.cms";
 
 const adapter = new AdapterBuilder();
 
@@ -24,6 +25,11 @@ adapter.removeOne("md", async (search) => {
     if (!id) return false;
     await deleteMd(id);
     return true;
+});
+
+adapter.find("md", async (search) => {
+    const list = await db.meta.find("md");
+    return list;
 });
 
 export const apiAdapter = adapter.getAdapter(true);

@@ -13,17 +13,17 @@ export async function addOrUpdateMd(name: string, content: string, tags: string[
 }
 
 export async function deleteMd(name: string) {
-    await db.meta.removeOne("md", { _id: name });
+    await db.meta.removeOne("md", { name });
     await unlink(mdPath + name + ".md");
 }
 
 export async function getMd(name: string) {
-    const meta = await db.meta.findOne<any>("md", { _id: name });
+    const meta = await db.meta.findOne<any>("md", { name });
     if (!meta) return { err: true, msg: "not found" };
     const content = await readFile(mdPath + name + ".md", "utf-8");
     return { content, meta, err: false };
 }
 
 export async function getMdList() {
-    return await db.meta.find("md", {}, {}, { select: ["_id"] });
+    return await db.meta.find("md", {}, {}, { select: ["name"] });
 }
