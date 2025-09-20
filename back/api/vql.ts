@@ -13,6 +13,6 @@ const config = new VQLConfig({
 const VQL = new VQLProcessor({
     ...db,
     api: apiAdapter
-}, config, resolver.createResolverOnlyPermValidFn());
+}, config, resolver.create());
 
 export default VQL;
