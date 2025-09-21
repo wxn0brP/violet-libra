@@ -1,38 +1,40 @@
-import { AdapterBuilder } from "@wxn0brp/vql/apiAbstract";
-import db from "../cms/data.cms";
+import { Router } from "@wxn0brp/falcon-frame";
 import crypto from "crypto";
-import { jwtVerify, SignJWT } from "jose";
+import { SignJWT } from "jose";
+import db from "../cms/data.cms";
+import { genId } from "@wxn0brp/db";
 
 interface User {
     _id: string;
-    name: string;
-    roles: string[];
+    login: string;
     email?: string;
-    password?: string;
-    createdAt?: string;
+    pass: string;
 }
 
-function sha256(data: string) {
+export function sha256(data: string) {
     return crypto.createHash("sha256").update(data).digest("hex");
 }
 
-const adapter = new AdapterBuilder();
+const router = new Router();
+const sign = new TextEncoder().encode(process.env.JWT_SECRET || genId() + genId() + genId() + genId());
 
-adapter.findOne("login", async (search) => {
-    const { login, password } = search;
-    if (!login || !password) return null;
+router.post("/login", async (req, res) => {
+    const { login, password } = req.body;
+    if (!login || !password) return res.status(401).json({ err: true, msg: "login or wrong password" });
 
-    const user = await db.access.findOne<User>("users", { login });
-    if (!user) return null;
-    if (user.password !== sha256(password)) return null;
+    const user = await db.access.findOne<User>("usr", { $or: [{ login }, { email: login }] });
+    if (!user) return res.status(401).json({ err: true, msg: "login or wrong password" });
+    if (user.pass !== sha256(password)) return res.status(401).json({ err: true, msg: "login or wrong password" });
 
     const token = await new SignJWT({ sub: user._id })
         .setProtectedHeader({ alg: "HS256" })
         .setIssuedAt()
         .setExpirationTime("30d")
-        .sign(new TextEncoder().encode(process.env.JWT_SECRET || ""));
+        .sign(sign);
 
-    return { token, name: user.name };
+    await db.access.updateOneOrAdd("token", { usr: user._id }, { _id: token });
+
+    return res.json({ err: false, token, name: user.login });
 });
 
-export const accountAdapter = adapter.getAdapter(true);
+export { router as accountRouter };

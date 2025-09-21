@@ -1,7 +1,6 @@
 import VQLProcessor, { VQLConfig } from "@wxn0brp/vql";
 import db from "../cms/data.cms";
 import { apiAdapter } from "./api";
-import { accountAdapter } from "./account";
 import { resolver } from "./resolver";
 import { gw } from "../perm";
 
@@ -16,7 +15,6 @@ const VQL = new VQLProcessor(
     {
         ...db,
         "api-cms-admin": apiAdapter,
-        "account": accountAdapter
     },
     config,
     resolver.createWithGw(gw)

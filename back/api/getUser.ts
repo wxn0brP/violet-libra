@@ -1,16 +1,18 @@
 import { FFRequest } from "@wxn0brp/falcon-frame";
 import { jwtVerify } from "jose";
 import db from "../cms/data.cms";
+import { AnotherCache } from "@wxn0brp/ac";
 
-interface User {
-    _id: string;
-    roles: string[];
-}
+const cache = new AnotherCache<string>();
 
 export async function getUser(req: FFRequest) {
     try {
-        const token = req.body.token;
+        const token = req.query.token;
         if (!token) return {};
+
+        if (cache.has(token)) {
+            return { _id: cache.get(token) };
+        }
 
         const secret = process.env.JWT_SECRET;
         if (!secret) {
@@ -23,13 +25,14 @@ export async function getUser(req: FFRequest) {
         const userId = payload.sub;
         if (!userId) return {};
 
-        const user = await db.access.findOne<User>("users", { _id: userId });
+        const dbToken = await db.access.findOne("token", { _id: token });
+        if (!dbToken) return {};
+
+        const user = await db.access.findOne<{ _id: string }>("users", { _id: userId });
         if (!user) return {};
 
-        return {
-            _id: user._id,
-            roles: user.roles || []
-        };
+        cache.set(token, user._id);
+        return { _id: user._id };
     } catch (error) {
         console.error("Error in getUser:", error);
         return {};
