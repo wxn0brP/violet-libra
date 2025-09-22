@@ -1,6 +1,6 @@
 import { FFRequest } from "@wxn0brp/falcon-frame";
 import { jwtVerify } from "jose";
-import db from "../cms/data.cms";
+import db from "../mgr/db.init";
 import { AnotherCache } from "@wxn0brp/ac";
 
 const cache = new AnotherCache<string>();

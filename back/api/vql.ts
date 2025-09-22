@@ -1,5 +1,5 @@
 import VQLProcessor, { VQLConfig } from "@wxn0brp/vql";
-import db from "../cms/data.cms";
+import db from "../mgr/db.init";
 import { apiAdapter } from "./api";
 import { resolver } from "./resolver";
 import { gw } from "../perm";

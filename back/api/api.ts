@@ -1,6 +1,6 @@
 import { AdapterBuilder } from "@wxn0brp/vql/apiAbstract";
-import { addOrUpdateMd, deleteMd, getMd } from "../cms/content.cms";
-import db from "../cms/data.cms";
+import { addOrUpdateMd, deleteMd, getMd } from "../mgr/md.mgr";
+import db from "../mgr/db.init";
 
 const adapter = new AdapterBuilder();
 

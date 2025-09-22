@@ -1,5 +1,5 @@
 import { unlink, writeFile, readFile } from "fs/promises";
-import db from "./data.cms";
+import db from "./db.init";
 
 const mdPath = "data/md/";
 

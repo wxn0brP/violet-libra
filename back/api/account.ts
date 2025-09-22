@@ -1,7 +1,7 @@
 import { Router } from "@wxn0brp/falcon-frame";
 import crypto from "crypto";
 import { SignJWT } from "jose";
-import db from "../cms/data.cms";
+import db from "../mgr/db.init";
 import { genId } from "@wxn0brp/db";
 
 interface User {

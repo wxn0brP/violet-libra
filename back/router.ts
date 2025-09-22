@@ -1,5 +1,5 @@
 import { marked } from "marked";
-import { getMd, getMdList } from "./cms/content.cms";
+import { getMd, getMdList } from "./mgr/md.mgr";
 import { Router } from "@wxn0brp/falcon-frame";
 const router = new Router();
 
