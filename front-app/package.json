@@ -14,7 +14,7 @@
     },
     "dependencies": {
         "@wxn0brp/flanker-ui": "^0.3.2",
-        "@wxn0brp/vql-client": "^0.2.1",
+        "@wxn0brp/vql-client": "^0.2.2",
         "easymde": "^2.20.0",
         "esbuild": "^0.25.10"
     }
