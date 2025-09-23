@@ -6,8 +6,15 @@
     "license": "MIT",
     "private": true,
     "type": "module",
+    "homepage": "https://github.com/wxn0brP/violet-libra",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wxn0brP/violet-libra.git"
+    },
     "scripts": {
         "build": "tsc && tsc-alias",
+        "build:all": "(cd front-app && yarn build) && yarn build",
+        "install:all": "(cd front-app && yarn) && yarn",
         "start": "node dist-back/index.js"
     },
     "devDependencies": {
@@ -25,5 +32,8 @@
         "jose": "^6.0.10",
         "marked": "^16.3.0",
         "source-map-support": "^0.5.21"
+    },
+    "engines": {
+        "node": ">=22.0.0"
     }
 }
