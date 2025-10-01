@@ -1,7 +1,7 @@
 {
-    "cmd": "tsc --noEmit && bun run back/index.ts",
+    "cmd": "tsc --noEmit && bun run src/index.ts",
     "watch": [
-        "back"
+        "src"
     ],
     "restart_cmd": "clear",
     "events": {

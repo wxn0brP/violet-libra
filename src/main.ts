@@ -7,11 +7,11 @@ import { accountRouter } from "./api/account";
 
 const app = new FalconFrame();
 
-app.setVar("views", "front/eng")
-app.static("front/static");
-app.static("/js", "front-app/dist");
+app.setVar("views", "public/dynamic");
+app.static("public/static");
+app.static("/js", "front/dist");
 app.use(router);
 FF_VQL(app, VQL, { getUser });
 app.use("/api/account", accountRouter);
 
-app.listen(15987, true);
+app.listen(+process.env.PORT || 15987, true);

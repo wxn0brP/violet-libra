@@ -1,6 +1,6 @@
 # Violet Libra
 
-A simple, lightweight CMS/blogging platform built with Node.js, TypeScript, and a custom VQL API.
+A simple, lightweight CMS/blogging platform built with Bun, TypeScript, and a custom VQL API.
 
 ## ⚠️ Project Status: MVP / Work in Progress ⚠️
 
@@ -8,7 +8,7 @@ This project is currently a Minimum Viable Product (MVP) and a work in progress.
 
 ## Tech Stack
 
-*   **Backend:** Node.js, TypeScript, Bun, [@wxn0brp/falcon-frame](https://www.npmjs.com/package/@wxn0brp/falcon-frame)
+*   **Backend:** TypeScript, Bun, [@wxn0brp/falcon-frame](https://www.npmjs.com/package/@wxn0brp/falcon-frame)
 *   **API:** [@wxn0brp/vql](https://www.npmjs.com/package/@wxn0brp/vql) (a custom GraphQL-like implementation)
 *   **Frontend (CMS):** TypeScript, esbuild, Yarn, [@wxn0brp/flanker-ui](https://www.npmjs.com/package/@wxn0brp/flanker-ui), EasyMDE
 *   **Authentication:** JWT-based authentication with [@wxn0brp/gate-warden](https://www.npmjs.com/package/@wxn0brp/gate-warden)
@@ -18,22 +18,19 @@ This project is currently a Minimum Viable Product (MVP) and a work in progress.
 
 ### Prerequisites
 
-*   Bun or Node.js (>= 22)
-*   Yarn or NPM
+* [Bun](https://bun.sh/)
 
 ### Installation
 
 ```bash
-yarn install:all
-yarn build:all
+bun run install:all
+bun run build:front
 ```
 
 ### Running
 
 ```bash
 bun run back/index.ts
-#or node
-yarn start
 ```
 
 The application will be available at `http://localhost:15987`.
