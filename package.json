@@ -13,7 +13,7 @@
     },
     "scripts": {
         "build:front": "cd front && bun run build",
-        "install:all": "(cd front && bun install) && bun install",
+        "install:all": "bun install && cd front && bun install",
         "start": "bun run src/index.ts"
     },
     "devDependencies": {
