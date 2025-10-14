@@ -1,13 +1,12 @@
-import { AdapterBuilder } from "@wxn0brp/vql/apiAbstract";
-import { addOrUpdateMd, deleteMd, getMd } from "../mgr/md.mgr";
-import db from "../mgr/db.init";
+import db from "#mgr/db.init";
+import { addOrUpdateMd, deleteMd, getMd } from "#mgr/md.mgr";
+import { AdapterBuilder } from "@wxn0brp/vql/helpers/apiAbstract";
 
 const adapter = new AdapterBuilder();
 
 adapter.findOne("md", async (search) => {
     if (!search.id) return null;
-    const md = await getMd(search._id || search.id);
-    return md;
+    return await getMd(search._id || search.id);
 });
 
 adapter.updateOneOrAdd("md", async (search, update) => {
@@ -28,8 +27,7 @@ adapter.removeOne("md", async (search) => {
 });
 
 adapter.find("md", async (search) => {
-    const list = await db.meta.find("md");
-    return list;
+    return await db.meta.find("md");
 });
 
 export const apiAdapter = adapter.getAdapter(true);

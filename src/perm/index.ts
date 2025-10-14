@@ -1,13 +1,12 @@
+import { sha256 } from "#api/account";
 import { genId, ValtheraClass } from "@wxn0brp/db";
 import { MemoryAction } from "@wxn0brp/db-core/db/memory";
 import { MultiBackend } from "@wxn0brp/db-core/db/multiStorage";
-import dbActionC from "@wxn0brp/db-storage-dir/action";
-import vFileCpu from "@wxn0brp/db-storage-dir/file/index";
+import { createFileActions } from "@wxn0brp/db-storage-dir";
 import { GateWarden } from "@wxn0brp/gate-warden";
-import { sha256 } from "../api/account";
 
 export const memory = new MemoryAction();
-export const file = new dbActionC("data/access", {}, vFileCpu);
+export const file = createFileActions("data/access");
 
 const adminId = process.env.ADMIN_ID || genId();
 const adminRoleId = process.env.ADMIN_ROLE_ID || genId();

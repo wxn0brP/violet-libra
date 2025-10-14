@@ -13,7 +13,4 @@ VConfig.hooks.onError = (query, e, res) => {
     }
 }
 
-
-try {
-    await fetchVQL("api-cms-admin md s.id=0");
-} catch { }
+fetchVQL("api-cms-admin md s.id=0").catch(() => { });

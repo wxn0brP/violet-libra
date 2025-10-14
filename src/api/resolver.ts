@@ -1,5 +1,5 @@
+import { gw } from "#perm";
 import { PermissionResolverEngine } from "@wxn0brp/vql/permissions/resolver";
-import { gw } from "../perm";
 
 export const resolver = new PermissionResolverEngine();
 

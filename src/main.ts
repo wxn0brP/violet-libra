@@ -14,4 +14,4 @@ app.use(router);
 FF_VQL(app, VQL, { getUser });
 app.use("/api/account", accountRouter);
 
-app.listen(+process.env.PORT || 15987, true);
+app.l(15987);

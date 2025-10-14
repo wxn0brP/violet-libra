@@ -4,8 +4,7 @@ class ListController {
     constructor(
         private listElement: HTMLUListElement,
         private availableOptions: string[] = []
-    ) {
-    }
+    ) { }
 
     getItems(): Array<{ type: "input" | "select", value: string }> {
         return this.items;
@@ -19,7 +18,7 @@ class ListController {
         });
         return options;
     }
-    
+
     setItems(items: Array<{ type: "input" | "select", value: string }>): void {
         this.items = items;
         this.renderList();
@@ -64,7 +63,7 @@ class ListController {
             } else if (item.type === "select") {
                 const options = this.getAvailableOptions(item.value);
                 if (options.length === 0) return;
-                
+
                 const select = document.createElement("select");
 
                 const emptyOption = document.createElement("option");
@@ -133,9 +132,9 @@ export default function createListController(container: HTMLElement, cfg: ListCf
             listController.addItem("select");
         });
     }
-    
+
     container.appendChild(listElement);
-    
+
     return {
         listController,
         addButton,

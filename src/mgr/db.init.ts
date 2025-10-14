@@ -1,6 +1,6 @@
-import fs from "fs";
+import { dbGw } from "#perm";
 import { Valthera } from "@wxn0brp/db";
-import { dbGw } from "../perm";
+import fs from "fs";
 
 if (!fs.existsSync("data")) {
     fs.mkdirSync("data");

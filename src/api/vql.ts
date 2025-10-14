@@ -1,8 +1,8 @@
+import db from "#mgr/db.init";
+import { gw } from "#perm";
 import VQLProcessor, { VQLConfig } from "@wxn0brp/vql";
-import db from "../mgr/db.init";
 import { apiAdapter } from "./api";
 import { resolver } from "./resolver";
-import { gw } from "../perm";
 
 const config = new VQLConfig({
     noCheckPermissions: false,
