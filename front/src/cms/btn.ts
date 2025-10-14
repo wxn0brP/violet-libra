@@ -1,7 +1,7 @@
 import { fetchVQL } from "@wxn0brp/vql-client";
 import { descriptionInput, easyMDE, nameInput, nameSelect, sidebar, tagList } from "./var";
 
-sidebar.qi<HTMLButtonElement>("save").addEventListener("click", async () => {
+sidebar.qs<HTMLButtonElement>("save", 1).addEventListener("click", async () => {
     if (!confirm("Are you sure you want to save?")) {
         return;
     }
@@ -32,7 +32,7 @@ sidebar.qi<HTMLButtonElement>("save").addEventListener("click", async () => {
     renderNameSelect();
 });
 
-sidebar.qi<HTMLButtonElement>("delete").addEventListener("click", async () => {
+sidebar.qs<HTMLButtonElement>("delete", 1).addEventListener("click", async () => {
     if (!confirm("Are you sure you want to delete?")) {
         return;
     }
@@ -41,7 +41,7 @@ sidebar.qi<HTMLButtonElement>("delete").addEventListener("click", async () => {
     alert(res ? "Deleted!" : "Not found");
 });
 
-sidebar.qi<HTMLButtonElement>("load").addEventListener("click", async () => {
+sidebar.qs<HTMLButtonElement>("load", 1).addEventListener("click", async () => {
     const name = nameInput.value;
     if (!name) {
         alert("Please enter a name");

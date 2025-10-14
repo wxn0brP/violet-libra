@@ -10,10 +10,10 @@ export const easyMDE = new EasyMDE({
 });
 qs("#editor").remove();
 
-export const tagsListUl = sidebar.qi<HTMLUListElement>("tags",);
-export const nameInput = sidebar.qi<HTMLInputElement>("name");
-export const nameSelect = sidebar.qi<HTMLSelectElement>("name-select");
-export const descriptionInput = sidebar.qi<HTMLInputElement>("description");
+export const tagsListUl = sidebar.qs<HTMLUListElement>("tags", 1);
+export const nameInput = sidebar.qi("name", 1);
+export const nameSelect = sidebar.qs<HTMLSelectElement>("name-select", 1);
+export const descriptionInput = sidebar.qi("description", 1);
 
 export const tagList = createListController(tagsListUl, {
     type: "mixed",
