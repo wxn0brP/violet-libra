@@ -2,5 +2,29 @@
     width: 80%;
     margin: 0 auto;
     padding: 1em;
-    min-height: calc(100vh - 51px);
+    min-height: calc(100vh - 2rem);
+    padding-bottom: 3rem;
+}
+
+ul,
+ol {
+    padding-left: 2rem;
+}
+
+h1,
+h2,
+h3 {
+    margin: 1rem 0 0.7rem 0;
+    padding-bottom: 0.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    text-indent: 2em;
+}
+
+hr {
+    margin: 1rem 0;
+    border: none;
+    border-top: 1px solid #ccc;
 }
