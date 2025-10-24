@@ -1,7 +1,7 @@
 import db from "#mgr/db.init";
 import { AnotherCache } from "@wxn0brp/ac";
 import { FFRequest } from "@wxn0brp/falcon-frame";
-import { jwtVerify } from "jose";
+import { JWTPayload, jwtVerify } from "jose";
 
 const cache = new AnotherCache<string>();
 
@@ -20,7 +20,13 @@ export async function getUser(req: FFRequest) {
             return {};
         }
 
-        const { payload } = await jwtVerify(token, new TextEncoder().encode(secret));
+        let payload: JWTPayload;
+        try {
+            const res = await jwtVerify(token, new TextEncoder().encode(secret));
+            payload = res.payload;
+        } catch {
+            return {};
+        }
 
         const userId = payload.sub;
         if (!userId) return {};
