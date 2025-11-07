@@ -26,8 +26,15 @@ adapter.removeOne("md", async (search) => {
     return true;
 });
 
-adapter.find("md", async (search) => {
+adapter.find("md", async () => {
     return await db.meta.find("md");
+});
+
+adapter.find("tags", async () => {
+    const allDocs = await db.meta.find("md");
+    const allTags = allDocs.flatMap(doc => doc.tags || []);
+    const uniqueTags = [...new Set(allTags)];
+    return uniqueTags.map(tag => ({ name: tag }));
 });
 
 export const apiAdapter = adapter.getAdapter(true);
