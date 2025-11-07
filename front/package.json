@@ -16,6 +16,8 @@
         "@wxn0brp/flanker-ui": "^0.4.3",
         "@wxn0brp/vql-client": "^0.2.2",
         "easymde": "^2.20.0",
-        "esbuild": "^0.25.10"
+        "esbuild": "^0.25.10",
+        "esbuild-style-plugin": "^1.6.3",
+        "sass": "^1.93.3"
     }
 }

@@ -1,10 +1,11 @@
 import esbuild from "esbuild";
+import stylePlugin from "esbuild-style-plugin";
 const dev = process.env.NODE_ENV === "development" || process.argv.includes("--dev");
 
 esbuild.build({
     entryPoints: [
         "src/cms/index.ts",
-        "src/page/index.ts",
+        "src/page/*.ts",
     ],
     outdir: "dist",
     bundle: true,
@@ -18,5 +19,15 @@ esbuild.build({
     keepNames: true,
     tsconfig: "tsconfig.json",
     logLevel: "info",
+    plugins: [
+        stylePlugin({
+            renderOptions: {
+                sassOptions: {
+                    silenceDeprecations: ["legacy-js-api"],
+                    style: "compressed"
+                }
+            }
+        })
+    ],
     loader: { ".ts": "ts" }
 });

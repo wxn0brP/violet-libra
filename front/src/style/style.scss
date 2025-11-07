@@ -25,10 +25,10 @@ body {
 
 a {
     color: var(--link-color);
-}
 
-a:hover {
-    color: firebrick;
+    &:hover {
+        color: firebrick;
+    }
 }
 
 footer {

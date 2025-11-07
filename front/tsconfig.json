@@ -9,7 +9,8 @@
         "outDir": "./dist",
         "inlineSourceMap": true,
         "types": [
-            "@wxn0brp/flanker-ui"
+            "@wxn0brp/flanker-ui",
+            "esbuild-style-plugin"
         ]
     },
     "include": [
