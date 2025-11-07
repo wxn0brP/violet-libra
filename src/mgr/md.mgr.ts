@@ -1,5 +1,6 @@
 import { readFile, unlink, writeFile } from "fs/promises";
 import db from "./db.init";
+import { PostMeta } from "#types/meta";
 
 const mdPath = "data/md/";
 
@@ -18,7 +19,7 @@ export async function deleteMd(name: string) {
 }
 
 export async function getMd(name: string) {
-    const meta = await db.meta.findOne<any>("md", { name });
+    const meta = await db.meta.findOne<PostMeta>("md", { name });
     if (!meta) return { err: true, msg: "not found" };
     const content = await readFile(mdPath + name + ".md", "utf-8");
     return { content, meta, err: false };

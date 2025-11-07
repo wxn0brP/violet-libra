@@ -36,6 +36,9 @@ footer {
     padding: .3rem;
     text-align: center;
     height: 2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 button {

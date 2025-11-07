@@ -1,6 +1,9 @@
 import { marked } from "marked";
 import { getMd, getMdList } from "./mgr/md.mgr";
 import { Router } from "@wxn0brp/falcon-frame";
+import { getRssItems } from "./mgr/rss.mgr";
+import { generateRssXml } from "./mgr/rss.generator";
+
 const router = new Router();
 
 router.get("/", async (req, res) => {
@@ -14,6 +17,22 @@ router.get("/cms", (req, res) => {
 });
 
 router.get("/login", (req, res) => res.render("login"));
+
+router.get("/rss.xml", async (req, res) => {
+    try {
+        const rssItems = await getRssItems();
+        const protocol = req.headers["x-forwarded-proto"] ? "https" : "http";
+        const host = req.headers.host || "localhost:15987";
+        const baseUrl = `${protocol}://${host}`;
+        const rssXml = generateRssXml(rssItems, "Violet Libra RSS Feed", "Latest posts from Violet Libra blog", baseUrl);
+
+        res.setHeader("Content-Type", "application/rss+xml");
+        res.send(rssXml);
+    } catch (error) {
+        console.error("Error generating RSS feed:", error);
+        res.status(500).send("Error generating RSS feed");
+    }
+});
 
 router.get("/:id", async (req, res, next) => {
     const md = await getMd(req.params.id);
