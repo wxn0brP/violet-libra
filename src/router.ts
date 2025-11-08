@@ -9,7 +9,7 @@ const router = new Router();
 router.get("/", async (req, res) => {
     const listData = await getMdList();
     const list = `<ul>${listData.map(item => `<li><a href="${item.name}">${item.name}</a></li>`).join("")}</ul>`
-    res.render("index", { title: " | List", body: `<h1>List</h1>` + list });
+    res.render("index", { body: `<h1>List</h1>` + list });
 });
 
 router.get("/cms", (req, res) => {
@@ -46,7 +46,7 @@ router.get("/:id", async (req, res, next) => {
         return;
     }
     const content = marked(md.content);
-    res.render("index", { title: " | " + md.meta.name, body: content });
+    res.render("post", { title: md.meta.name, body: content });
 });
 
 export default router;
