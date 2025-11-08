@@ -3,9 +3,16 @@ import { getMdList, getMd } from "./md.mgr";
 import { marked } from "marked";
 import { PostMeta } from "#types/meta";
 import { RssItem } from "#types/rss";
+import { Search } from "@wxn0brp/vql/vql";
 
-export async function getRssItems(): Promise<RssItem[]> {
-    const postMeta = await getMdList() as PostMeta[];
+export async function getRssItems(tags?: string[]): Promise<RssItem[]> {
+    const query: Search<PostMeta> = {};
+
+    if (tags?.length) {
+        query["$arrincall"] = { tags: tags };
+    }
+
+    const postMeta = await getMdList(query);
 
     const rssItems: RssItem[] = [];
 

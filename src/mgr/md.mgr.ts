@@ -1,6 +1,7 @@
 import { readFile, unlink, writeFile } from "fs/promises";
 import db from "./db.init";
 import { PostMeta } from "#types/meta";
+import { Search } from "@wxn0brp/vql/vql";
 
 const mdPath = "data/md/";
 
@@ -25,6 +26,6 @@ export async function getMd(name: string) {
     return { content, meta, err: false };
 }
 
-export async function getMdList() {
-    return await db.meta.find("md", {}, {}, { select: ["name"] });
+export async function getMdList(query: Search = {}) {
+    return await db.meta.find<PostMeta>("md", query, {}, { select: ["name"] });
 }
