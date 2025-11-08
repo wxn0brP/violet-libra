@@ -5,11 +5,17 @@ import { PostMeta } from "#types/meta";
 import { RssItem } from "#types/rss";
 import { Search } from "@wxn0brp/vql/vql";
 
-export async function getRssItems(tags?: string[]): Promise<RssItem[]> {
-    const query: Search<PostMeta> = {};
+export interface Opts {
+    tags?: string[];
+    q?: Search<PostMeta>;
+    raw?: boolean;
+}
 
-    if (tags?.length) {
-        query["$arrincall"] = { tags: tags };
+export async function getRssItems(opts: Opts = {}): Promise<RssItem[]> {
+    const query: Search<PostMeta> = opts.q || {};
+
+    if (opts.tags?.length) {
+        query["$arrincall"] = { tags: opts.tags };
     }
 
     const postMeta = await getMdList(query);
@@ -24,7 +30,7 @@ export async function getRssItems(tags?: string[]): Promise<RssItem[]> {
             continue;
         }
 
-        const contentHtml = await marked(post.content);
+        const contentHtml = opts.raw ? post.content : await marked(post.content);
         const pubDate = new Date(convertIdToUnix(post.meta._id));
 
         rssItems.push({

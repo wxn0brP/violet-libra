@@ -20,8 +20,12 @@ router.get("/login", (req, res) => res.render("login"));
 
 router.get("/rss.xml", async (req, res) => {
     try {
-        const tags = req.query.tags ? req.query.tags.split(",") : undefined;
-        const rssItems = await getRssItems(tags);
+        const rssItems = await getRssItems({
+            tags: req.query.tags ? req.query.tags.split(",") : undefined,
+            q: req.query.q ? JSON.parse(req.query.q) : undefined,
+            raw: typeof req.query.raw !== "undefined",
+        });
+
         const protocol = req.headers["x-forwarded-proto"] ? "https" : "http";
         const host = req.headers.host || "localhost:15987";
         const baseUrl = `${protocol}://${host}`;
