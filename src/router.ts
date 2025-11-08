@@ -3,6 +3,7 @@ import { getMd, getMdList } from "./mgr/md.mgr";
 import { Router } from "@wxn0brp/falcon-frame";
 import { getRssItems } from "./mgr/rss.mgr";
 import { generateRssXml } from "./mgr/rss.generator";
+import { performSearch } from "./mgr/search.mgr";
 
 const router = new Router();
 
@@ -36,6 +37,19 @@ router.get("/rss.xml", async (req, res) => {
     } catch (error) {
         console.error("Error generating RSS feed:", error);
         res.status(500).send("Error generating RSS feed");
+    }
+});
+
+router.get("/api/search", async (req, res) => {
+    if (req.query.tags)
+        req.query.tags = req.query.tags.split(",").map(tag => tag.trim()).filter(Boolean) as any;
+
+    try {
+        const results = await performSearch(req.query);
+        res.json(results);
+    } catch (error) {
+        console.error("Search error:", error);
+        res.status(500).json({ error: "Search failed" });
     }
 });
 

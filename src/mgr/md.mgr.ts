@@ -27,5 +27,5 @@ export async function getMd(name: string) {
 }
 
 export async function getMdList(query: Search = {}) {
-    return await db.meta.find<PostMeta>("md", query, {}, { select: ["name"] });
+    return await db.meta.find<PostMeta>("md", query);
 }
