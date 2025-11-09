@@ -1,20 +1,16 @@
+import { confirm, uiMsg } from "@wxn0brp/flanker-dialog";
 import { fetchVQL } from "@wxn0brp/vql-client";
 import { descriptionInput, easyMDE, nameInput, nameSelect, sidebar, tagList } from "./var";
 
 sidebar.qs<HTMLButtonElement>("save", 1).addEventListener("click", async () => {
-    if (!confirm("Are you sure you want to save?")) {
-        return;
-    }
+    if (!await confirm("Are you sure you want to save?")) return;
+
     const name = nameInput.value;
-    if (!name) {
-        alert("Please enter a name");
-        return;
-    }
+    if (!name) return uiMsg("Please enter a name");
+
     const content = easyMDE.value();
-    if (!content) {
-        alert("Please enter some content");
-        return;
-    }
+    if (!content) return uiMsg("Please enter some content");
+
     const tags = tagList.listController.getItems().map((item) => item.value);
     const desc = descriptionInput.value;
 
@@ -28,48 +24,39 @@ sidebar.qs<HTMLButtonElement>("save", 1).addEventListener("click", async () => {
             }
         }
     });
-    alert(res ? "Saved!" : "Not found");
+    uiMsg(res ? "Saved!" : "Not found");
     renderNameSelect();
 });
 
 sidebar.qs<HTMLButtonElement>("delete", 1).addEventListener("click", async () => {
-    if (!confirm("Are you sure you want to delete?")) {
-        return;
-    }
+    if (!await confirm("Are you sure you want to delete?")) return;
+
     const name = nameInput.value;
     const res = await fetchVQL("api-cms-admin -md! s.id = $id", { id: name });
-    alert(res ? "Deleted!" : "Not found");
+    uiMsg(res ? "Deleted!" : "Not found");
 });
 
 sidebar.qs<HTMLButtonElement>("load", 1).addEventListener("click", async () => {
     const name = nameInput.value;
-    if (!name) {
-        alert("Please enter a name");
-        return;
-    }
+    if (!name) return uiMsg("Please enter a name");
     load(name);
 });
 
 async function load(name: string) {
     const data = await fetchVQL("api-cms-admin md! s.id = $id", { id: name });
-    if (!data) {
-        alert("Not found");
-        return;
-    }
+    if (!data) return uiMsg("Not found");
+
     easyMDE.value(data.content);
     if (data.tags) tagList.listController.setItems(data.tags.map((tag) => ({ value: tag, type: "input" })));
     descriptionInput.value = data.desc || "";
 }
 
-nameSelect.addEventListener("change", () => {
+nameSelect.addEventListener("change", async () => {
     const name = nameSelect.value;
     nameInput.value = name;
-    if (name) load(name);
-    else {
-        if (confirm("Are you sure you want to clear?")) {
-            easyMDE.value("");
-        }
-    }
+    if (name) return load(name);
+    if (!await confirm("Are you sure you want to clear?")) return
+    easyMDE.value("");
 });
 
 renderNameSelect();

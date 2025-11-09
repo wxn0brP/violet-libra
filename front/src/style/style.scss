@@ -1,6 +1,8 @@
 :root {
-    --background-color: #121212;
-    --text-color: #e0e0e0;
+    --back: #121212;
+    --txt: #e0e0e0;
+    --accent: #bb86fc;
+    --accentRGB: 187, 134, 252;
     --link-color: #bb86fc;
     --link-hover-color: #bb86fc;
     --header-footer-background: #1f1f1f;
@@ -18,8 +20,8 @@
 }
 
 body {
-    background-color: var(--background-color);
-    color: var(--text-color);
+    background-color: var(--back);
+    color: var(--txt);
     font-size: 1.1rem;
     font-family:
         -apple-system, BlinkMacSystemFont,
@@ -48,7 +50,7 @@ footer {
 button {
     background-color: var(--button-background);
     border: none;
-    color: var(--background-color);
+    color: var(--back);
     padding: 0.5em 1em;
     cursor: pointer;
 }
@@ -62,7 +64,7 @@ textarea,
 select {
     background-color: var(--input-background);
     border: 1px solid var(--input-border);
-    color: var(--text-color);
+    color: var(--txt);
     padding: 0.5em;
 }
 
