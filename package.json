@@ -26,7 +26,6 @@
         "@wxn0brp/falcon-frame": "^0.5.1",
         "@wxn0brp/gate-warden": "^0.4.1",
         "@wxn0brp/vql": "^0.8.3",
-        "dotenv": "^17.2.3",
         "fuse.js": "^7.1.0",
         "jose": "^6.1.0",
         "marked": "^17.0.0"
