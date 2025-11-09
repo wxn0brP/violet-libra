@@ -1,9 +1,7 @@
+import { Router } from "@wxn0brp/falcon-frame";
 import { marked } from "marked";
 import { getMd, getMdList } from "./mgr/md.mgr";
-import { Router } from "@wxn0brp/falcon-frame";
-import { getRssItems } from "./mgr/rss.mgr";
-import { generateRssXml } from "./mgr/rss.generator";
-import { performSearch } from "./mgr/search.mgr";
+import { rssHandler } from "#api/rss";
 
 const router = new Router();
 
@@ -13,45 +11,11 @@ router.get("/", async (req, res) => {
     res.render("index", { body: `<h1>List</h1>` + list });
 });
 
-router.get("/cms", (req, res) => {
-    res.render("cms", { title: " | Editor" });
-});
-
+router.get("/cms", (req, res) => res.render("cms"));
 router.get("/login", (req, res) => res.render("login"));
 
-router.get("/rss.xml", async (req, res) => {
-    try {
-        const rssItems = await getRssItems({
-            tags: req.query.tags ? req.query.tags.split(",") : undefined,
-            q: req.query.q ? JSON.parse(req.query.q) : undefined,
-            raw: typeof req.query.raw !== "undefined",
-        });
-
-        const protocol = req.headers["x-forwarded-proto"] ? "https" : "http";
-        const host = req.headers.host || "localhost:15987";
-        const baseUrl = `${protocol}://${host}`;
-        const rssXml = generateRssXml(rssItems, "Violet Libra RSS Feed", "Latest posts from Violet Libra blog", baseUrl);
-
-        res.setHeader("Content-Type", "application/rss+xml");
-        res.send(rssXml);
-    } catch (error) {
-        console.error("Error generating RSS feed:", error);
-        res.status(500).send("Error generating RSS feed");
-    }
-});
-
-router.get("/api/search", async (req, res) => {
-    if (req.query.tags)
-        req.query.tags = req.query.tags.split(",").map(tag => tag.trim()).filter(Boolean) as any;
-
-    try {
-        const results = await performSearch(req.query);
-        res.json(results);
-    } catch (error) {
-        console.error("Search error:", error);
-        res.status(500).json({ error: "Search failed" });
-    }
-});
+for (const path of ["rss", "rss.xml", "feed.xml", "feed", "feed.rss"])
+    router.get("/" + path, rssHandler);
 
 router.get("/:id", async (req, res, next) => {
     const md = await getMd(req.params.id);
