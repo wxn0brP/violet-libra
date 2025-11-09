@@ -30,7 +30,7 @@ bun run build:front
 ### Running
 
 ```bash
-bun run back/index.ts
+bun run src/index.ts
 ```
 
 The application will be available at `http://localhost:15987`.
