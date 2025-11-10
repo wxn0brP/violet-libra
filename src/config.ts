@@ -9,6 +9,9 @@ const configDefaults = [
 
     { _: "perm.admin.id", v: "admin" },
     { _: "perm.admin.role.id", v: "admin" },
+
+    { _: "rate.count", v: "10" },
+    { _: "rate.per", v: "60000" },
 ] as const;
 
 for (const { _: k, v } of configDefaults) {
