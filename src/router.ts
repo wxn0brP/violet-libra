@@ -2,8 +2,10 @@ import { Router } from "@wxn0brp/falcon-frame";
 import { marked } from "marked";
 import { getMd, getMdList } from "./mgr/md.mgr";
 import { rssHandler } from "#api/rss";
+import { rateLimit } from "#rate";
 
 const router = new Router();
+router.use(rateLimit);
 
 router.get("/", async (req, res) => {
     const listData = await getMdList();
