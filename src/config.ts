@@ -10,7 +10,7 @@ const configDefaults = [
     { _: "perm.admin.id", v: "admin" },
     { _: "perm.admin.role.id", v: "admin" },
 
-    { _: "rate.count", v: "10" },
+    { _: "rate.count", v: "30" },
     { _: "rate.per", v: "60000" },
 ] as const;
 
