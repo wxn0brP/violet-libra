@@ -25,6 +25,10 @@ This project is currently a Minimum Viable Product (MVP) and a work in progress.
 ```bash
 bun run install:all
 bun run build:front
+cp .env.example .env
+nano .env
+bun run src/config.ts
+nano data/system/config/1.db
 ```
 
 ### Running

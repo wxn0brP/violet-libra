@@ -1,15 +1,17 @@
-import router from "./router";
+import { api } from "#api";
+import { cfg } from "#config";
 import FalconFrame from "@wxn0brp/falcon-frame";
 import { FF_VQL } from "@wxn0brp/vql";
-import VQL from "./api/vql";
 import { getUser } from "./api/getUser";
-import { api } from "#api";
+import VQL from "./api/vql";
+import router from "./router";
 
 const app = new FalconFrame();
 
 app.setVar("views", "public/dynamic");
+const pageName = await cfg.get("app.name");
 app.setVar("render data", {
-    page: process.env.PAGE_NAME || "VIOLET LIBRA",
+    page: pageName || "VIOLET LIBRA",
 });
 
 app.static("public/static");
