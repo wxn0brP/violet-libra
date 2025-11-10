@@ -6,16 +6,15 @@ const adapter = new AdapterBuilder();
 
 adapter.findOne("md", async (search) => {
     if (!search.id) return null;
-    return await getMd(search._id || search.id);
+    return await getMd(search._id || search.id, { allowPrivate: true, allowScheduled: true });
 });
 
 adapter.updateOneOrAdd("md", async (search, update) => {
     const { id } = search;
-    const { content, tags, desc } = update;
-
+    const { content } = update;
     if (!id || !content) return false;
-
-    await addOrUpdateMd(id, content, tags, desc);
+    delete update.content;
+    await addOrUpdateMd(id, content, update);
     return true;
 });
 

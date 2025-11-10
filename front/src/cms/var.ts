@@ -14,6 +14,8 @@ export const tagsListUl = sidebar.qs<HTMLUListElement>("tags", 1);
 export const nameInput = sidebar.qi("name", 1);
 export const nameSelect = sidebar.qs<HTMLSelectElement>("name-select", 1);
 export const descriptionInput = sidebar.qi("description", 1);
+export const privateCheckbox = sidebar.qi("private", 1);
+export const scheduledInput = sidebar.qi("scheduled", 1);
 
 export const tagList = createListController(tagsListUl, {
     type: "mixed",
