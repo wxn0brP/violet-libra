@@ -2,7 +2,7 @@ import { api } from "#api";
 import { cfg } from "#config";
 import FalconFrame from "@wxn0brp/falcon-frame";
 import { FF_VQL } from "@wxn0brp/vql";
-import { getUser } from "./api/getUser";
+import { getUser } from "./api/utils/getUser";
 import VQL from "./api/vql";
 import router from "./router";
 

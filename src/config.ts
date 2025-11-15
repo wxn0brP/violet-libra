@@ -3,13 +3,6 @@ import db from "#mgr/db.init";
 const configDefaults = [
     { _: "app.name", v: "VIOLET LIBRA" },
 
-    { _: "auth.admin.login", v: "admin" },
-    { _: "auth.admin.email", v: "admin@vl.com" },
-    { _: "auth.admin.pass", v: "" },
-
-    { _: "perm.admin.id", v: "admin" },
-    { _: "perm.admin.role.id", v: "admin" },
-
     { _: "rate.count", v: "30" },
     { _: "rate.per", v: "60000" },
 ] as const;

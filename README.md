@@ -29,6 +29,8 @@ cp .env.example .env
 nano .env
 bun run src/config.ts
 nano data/system/config/1.db
+bun run src/setupDB.ts
+nano data/access/usr/1.db
 ```
 
 ### Running

@@ -1,18 +1,14 @@
 import db from "#mgr/db.init";
 import { genId } from "@wxn0brp/db";
 import { Router } from "@wxn0brp/falcon-frame";
-import crypto from "crypto";
 import { SignJWT } from "jose";
+import { sha256 } from "./utils/sha";
 
 interface User {
     _id: string;
     login: string;
     email?: string;
     pass: string;
-}
-
-export function sha256(data: string) {
-    return crypto.createHash("sha256").update(data).digest("hex");
 }
 
 const router = new Router();
