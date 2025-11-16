@@ -1,9 +1,9 @@
 import { convertIdToUnix } from "@wxn0brp/db";
 import { getMdList, getMd } from "./md.mgr";
-import { marked } from "marked";
 import { PostMeta } from "#types/meta";
 import { RssItem } from "#types/rss";
 import { Search } from "@wxn0brp/vql/vql";
+import { renderMd } from "#renderMd";
 
 export interface Opts {
     tags?: string[];
@@ -30,7 +30,7 @@ export async function getRssItems(opts: Opts = {}): Promise<RssItem[]> {
             continue;
         }
 
-        const contentHtml = opts.raw ? post.content : await marked(post.content);
+        const contentHtml = opts.raw ? post.content : await renderMd(post.content);
         const pubDate = new Date(convertIdToUnix(post.meta._id));
 
         rssItems.push({

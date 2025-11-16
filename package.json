@@ -27,8 +27,10 @@
         "@wxn0brp/falcon-frame-plugin": "^0.0.3",
         "@wxn0brp/gate-warden": "^0.4.1",
         "@wxn0brp/vql": "^0.8.3",
+        "dompurify": "^3.3.0",
         "fuse.js": "^7.1.0",
         "jose": "^6.1.1",
+        "jsdom": "^27.2.0",
         "marked": "^17.0.0"
     }
 }

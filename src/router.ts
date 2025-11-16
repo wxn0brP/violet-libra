@@ -1,8 +1,8 @@
-import { Router } from "@wxn0brp/falcon-frame";
-import { marked } from "marked";
-import { getMd, getMdList } from "./mgr/md.mgr";
 import { rssHandler } from "#api/rss";
 import { rateLimit } from "#rate";
+import { Router } from "@wxn0brp/falcon-frame";
+import { getMd, getMdList } from "./mgr/md.mgr";
+import { renderMd } from "#renderMd";
 
 const router = new Router();
 router.use(rateLimit);
@@ -25,8 +25,10 @@ router.get("/:id", async (req, res, next) => {
         next();
         return;
     }
-    const content = marked(md.content);
-    res.render("post", { title: md.meta.name, body: content });
+
+    const body = await renderMd(md.content);
+
+    res.render("post", { title: md.meta.name, body });
 });
 
 export default router;
