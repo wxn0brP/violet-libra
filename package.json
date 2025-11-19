@@ -21,7 +21,7 @@
         "typescript": "*"
     },
     "dependencies": {
-        "@wxn0brp/ac": "^0.0.2",
+        "@wxn0brp/ac": "^0.0.3",
         "@wxn0brp/db": "^0.40.1",
         "@wxn0brp/falcon-frame": "^0.5.3",
         "@wxn0brp/falcon-frame-plugin": "^0.0.3",
