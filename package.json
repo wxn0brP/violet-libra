@@ -21,16 +21,16 @@
         "typescript": "*"
     },
     "dependencies": {
-        "@wxn0brp/ac": "^0.0.2",
-        "@wxn0brp/db": "^0.40.1",
+        "@wxn0brp/ac": "^0.0.3",
+        "@wxn0brp/db": "^0.40.3",
         "@wxn0brp/falcon-frame": "^0.5.3",
         "@wxn0brp/falcon-frame-plugin": "^0.0.3",
-        "@wxn0brp/gate-warden": "^0.4.1",
+        "@wxn0brp/gate-warden": "^0.5.0",
         "@wxn0brp/vql": "^0.8.3",
         "dompurify": "^3.3.0",
         "fuse.js": "^7.1.0",
-        "jose": "^6.1.1",
+        "jose": "^6.1.2",
         "jsdom": "^27.2.0",
-        "marked": "^17.0.0"
+        "marked": "^17.0.1"
     }
 }
