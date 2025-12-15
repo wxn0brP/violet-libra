@@ -37,7 +37,7 @@ export async function getRssItems(opts: Opts = {}): Promise<RssItem[]> {
             title: meta.name,
             description: meta.desc || "",
             content: contentHtml,
-            link: `/post/${meta.name}`,
+            link: `/${meta.name}`,
             pubDate,
             tags: meta.tags || []
         });

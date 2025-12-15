@@ -14,8 +14,6 @@ export const rssHandler: RouteHandler = async (req, res) => {
         const host = req.headers.host || "localhost:15987";
         const baseUrl = `${protocol}://${host}`;
         const rssXml = generateRssXml(rssItems, "Violet Libra RSS Feed", "Latest posts from Violet Libra blog", baseUrl);
-
-        res.setHeader("Content-Type", "application/rss+xml");
         res.send(rssXml);
     } catch (error) {
         console.error("Error generating RSS feed:", error);
