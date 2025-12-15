@@ -16,8 +16,16 @@ router.get("/", async (req, res) => {
 router.get("/cms", (req, res) => res.render("cms"));
 router.get("/login", (req, res) => res.render("login"));
 
+const rssRouter = router.router("/");
+rssRouter.use((req, res, next) => {
+    res.setHeader("Content-Type", "application/rss+xml");
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    next();
+});
+
 for (const path of ["rss", "rss.xml", "feed.xml", "feed", "feed.rss"])
-    router.get("/" + path, rssHandler);
+    rssRouter.get("/" + path, rssHandler);
 
 router.get("/:id", async (req, res, next) => {
     const md = await getMd(req.params.id);
