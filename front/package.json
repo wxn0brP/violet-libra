@@ -10,7 +10,7 @@
 		"build": "bun run build.ts"
 	},
 	"devDependencies": {
-		"typescript": "^5"
+		"typescript": "^6.0.0"
 	},
 	"dependencies": {
 		"@wxn0brp/flanker-dialog": "^0.0.5",
