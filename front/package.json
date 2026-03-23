@@ -13,7 +13,7 @@
 		"typescript": "^5"
 	},
 	"dependencies": {
-		"@wxn0brp/flanker-dialog": "^0.0.5",
+		"@wxn0brp/flanker-dialog": "^0.1.0",
 		"@wxn0brp/flanker-ui": "^0.4.6",
 		"@wxn0brp/vql-client": "^0.2.7",
 		"easymde": "^2.20.0",
