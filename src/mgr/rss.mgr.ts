@@ -1,17 +1,11 @@
-import { convertIdToUnix } from "@wxn0brp/db";
-import { getMdList, getMd } from "./md.mgr";
-import { PostMeta } from "#types/meta";
-import { RssItem } from "#types/rss";
-import { Search } from "@wxn0brp/vql/vql";
 import { renderMd } from "#renderMd";
+import { PostMeta } from "#types/meta";
+import type { RssItem, RssOpts } from "#types/rss";
+import { convertIdToUnix } from "@wxn0brp/db";
+import { Search } from "@wxn0brp/vql/vql";
+import { getMd, getMdList } from "./md.mgr";
 
-export interface Opts {
-    tags?: string[];
-    q?: Search<PostMeta>;
-    raw?: boolean;
-}
-
-export async function getRssItems(opts: Opts = {}): Promise<RssItem[]> {
+export async function getRssItems(opts: RssOpts = {}): Promise<RssItem[]> {
     const query: Search<PostMeta> = opts.q || {};
 
     if (opts.tags?.length) {

@@ -2,34 +2,112 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 300px;
+    width: 320px;
     height: 100vh;
     background-color: #282a36;
     color: #f8f8f2;
-    padding: 5px;
+    padding: 14px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
 
     button {
-        margin-left: 5px;
+        border-radius: 6px;
+        min-height: 2.25rem;
     }
 
-    label {
+    .cms-sidebar-header {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 10px;
-        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+
+        h1 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+    }
+
+    .status-pill {
+        padding: .2rem .55rem;
+        border: 1px solid rgba(255, 255, 255, .18);
+        border-radius: 999px;
+        font-size: .8rem;
+        color: #f8f8f2;
+        background: rgba(255, 255, 255, .08);
+    }
+
+    .status-pill[data-status="unsaved"] {
+        color: #121212;
+        background: #f1fa8c;
+    }
+
+    .status-pill[data-status="private"] {
+        background: #44475a;
+    }
+
+    .status-pill[data-status="scheduled"] {
+        color: #121212;
+        background: #8be9fd;
+    }
+
+    .status-pill[data-status="public"] {
+        color: #121212;
+        background: #50fa7b;
+    }
+
+    .cms-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .field {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 12px;
+
+        span {
+            font-size: .85rem;
+            color: #d4d4d4;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            border-radius: 6px;
+        }
+    }
+
+    .inline-field {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        input {
+            width: auto;
+        }
     }
 
     .list {
+        display: grid;
+        gap: 8px;
         margin-top: 10px;
+        padding-left: 0;
+        list-style: none;
 
         li {
-            margin-top: 5px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 6px;
+            align-items: center;
         }
 
         select,
         input {
-            width: 65%;
+            width: 100%;
         }
     }
 

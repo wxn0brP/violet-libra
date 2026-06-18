@@ -1,28 +1,24 @@
-import db from "#mgr/db.init";
+import { db } from "#mgr/db.init";
 import { AnotherCache } from "@wxn0brp/ac";
 import { FFRequest } from "@wxn0brp/falcon-frame";
+import { UserManager } from "@wxn0brp/gate-warden";
 import { JWTPayload, jwtVerify } from "jose";
 
 const cache = new AnotherCache<string>();
+const encoded = new TextEncoder().encode(process.env.JWT_SECRET);
+const gwUsers = new UserManager(db.access);
 
 export async function getUser(req: FFRequest) {
     try {
         const token = req.query.token;
         if (!token) return {};
 
-        if (cache.has(token)) {
+        if (cache.has(token))
             return { _id: cache.get(token) };
-        }
-
-        const secret = process.env.JWT_SECRET;
-        if (!secret) {
-            console.error("JWT_SECRET not configured");
-            return {};
-        }
 
         let payload: JWTPayload;
         try {
-            const res = await jwtVerify(token, new TextEncoder().encode(secret));
+            const res = await jwtVerify(token, encoded);
             payload = res.payload;
         } catch {
             return {};
@@ -31,10 +27,10 @@ export async function getUser(req: FFRequest) {
         const userId = payload.sub;
         if (!userId) return {};
 
-        const dbToken = await db.access.findOne("token", { _id: token });
+        const dbToken = await db.access.token.findOne({ _id: token });
         if (!dbToken) return {};
 
-        const user = await db.access.findOne<{ _id: string }>("users", { _id: userId });
+        const user = await gwUsers.getUser(userId);
         if (!user) return {};
 
         cache.set(token, user._id);

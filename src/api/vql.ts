@@ -1,4 +1,4 @@
-import db from "#mgr/db.init";
+import { db } from "#mgr/db.init";
 import { gw } from "#perm";
 import VQLProcessor, { VQLConfig } from "@wxn0brp/vql";
 import { apiAdapter } from "./api";

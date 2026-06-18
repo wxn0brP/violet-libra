@@ -1,4 +1,4 @@
-import { confirm } from "@wxn0brp/flanker-dialog";
+import { confirm } from "@wxn0brp/flanker-dialog/confirm";
 import { fetchVQL, VConfig } from "@wxn0brp/vql-client";
 
 function off() {

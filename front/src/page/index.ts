@@ -2,27 +2,33 @@ import "@wxn0brp/flanker-ui/html";
 import "../style/style.scss";
 import Fuse from "fuse.js";
 
-const searchInput = qs<HTMLInputElement>("#searchInput");
-searchInput.addEventListener("input", performSearch);
+const searchInput = qi("#searchInput");
+const emptyState = qs("#searchEmpty");
+const posts = [...document.querySelectorAll<HTMLElement>(".post-card")];
 
-const allPosts = [...document.querySelectorAll("main li")] as HTMLLIElement[];
-const titles = Array.from(allPosts).map(post => post.textContent);
+const fuse = new Fuse(
+    posts.map((post, index) => ({
+        index,
+        text: post.dataset.search || post.textContent || "",
+    })),
+    {
+        keys: ["text"],
+        includeScore: true,
+        threshold: 0.35,
+    }
+);
+
+searchInput.addEventListener("input", performSearch);
 
 function performSearch() {
     const value = searchInput.value.trim();
-    if (!value) {
-        allPosts.forEach(el => el.css("display", ""));
-        return;
-    }
+    const visibleIndexes = value
+        ? new Set(fuse.search(value).map((result) => result.item.index))
+        : new Set(posts.map((_, index) => index));
 
-    const fuse = new Fuse(titles, {
-        keys: ["textContent"],
-        includeScore: true,
-        threshold: 0.4,
+    posts.forEach((post, index) => {
+        post.hidden = !visibleIndexes.has(index);
     });
 
-    const results = fuse.search(value);
-    allPosts.forEach(el => el.css("display", "none"));
-    for (const result of results)
-        allPosts[result.refIndex].css("display", "");
+    emptyState.hidden = posts.length === 0 || visibleIndexes.size > 0;
 }

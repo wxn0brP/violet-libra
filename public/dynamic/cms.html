@@ -11,34 +11,39 @@
 <body>
     <textarea id="editor"></textarea>
     <aside id="sidebar">
-        <label>
-            Name:
-            <input type="text" data-id="name">
-        </label>
-        <label>
-            Name (Select existing):
+        <header class="cms-sidebar-header">
+            <h1>Editor</h1>
+            <span class="status-pill" data-id="status">New</span>
+        </header>
+        <div class="cms-actions">
+            <button data-id="save">Save</button>
+            <button data-id="new">New</button>
+            <button data-id="delete">Delete</button>
+        </div>
+        <label class="field">
+            <span>Existing posts</span>
             <select data-id="name-select"></select>
         </label>
-        <label>
-            Description:
-            <textarea data-id="description"></textarea>
+        <label class="field">
+            <span>Name</span>
+            <input type="text" data-id="name" placeholder="post-name">
         </label>
-        <label>
-            <div>
-                Private: <input type="checkbox" data-id="private">
-            </div>
+        <label class="field">
+            <span>Description</span>
+            <textarea data-id="description" rows="4"></textarea>
         </label>
-        <label>
-            Scheduled:
+        <div class="field inline-field">
+            <span>Private</span>
+            <input type="checkbox" data-id="private">
+        </div>
+        <label class="field">
+            <span>Scheduled</span>
             <input type="datetime-local" data-id="scheduled">
         </label>
-        <div>
-            Tags:
+        <div class="field">
+            <span>Tags</span>
             <div data-id="tags"></div>
         </div>
-        <button data-id="save">Save</button>
-        <button data-id="delete">Delete</button>
-        <button data-id="load">Load</button>
     </aside>
     <div id="FD-message"></div>
     <div id="FD-prompt"></div>

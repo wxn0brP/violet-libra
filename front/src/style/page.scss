@@ -1,7 +1,7 @@
 #app {
-    width: 80%;
+    width: min(900px, calc(100% - 2rem));
     margin: 0 auto;
-    padding: 1em;
+    padding: 1.25rem 0;
     min-height: calc(100vh - 2rem);
     padding-bottom: 3rem;
 
@@ -9,6 +9,79 @@
         margin-bottom: 1rem;
         text-indent: 2em;
     }
+}
+
+.home-header {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0 1.5rem;
+
+    h1 {
+        margin: 0;
+    }
+
+    input {
+        width: 100%;
+        min-height: 2.75rem;
+        border-radius: 6px;
+    }
+}
+
+.post-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.post-card {
+    display: grid;
+    gap: .65rem;
+    padding: 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--input-background) 65%, transparent);
+}
+
+.post-title {
+    width: fit-content;
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.post-desc {
+    margin: 0;
+    color: color-mix(in srgb, var(--txt) 78%, transparent);
+    text-indent: 0 !important;
+}
+
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem 1rem;
+    align-items: center;
+    font-size: .9rem;
+    color: var(--placeholder-color);
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+}
+
+.post-tag {
+    padding: .15rem .45rem;
+    border: 1px solid var(--input-border);
+    border-radius: 999px;
+    color: var(--txt);
+}
+
+.empty-state {
+    padding: 1rem;
+    border: 1px dashed var(--input-border);
+    border-radius: 8px;
+    color: var(--placeholder-color);
+    text-align: center;
 }
 
 ul,

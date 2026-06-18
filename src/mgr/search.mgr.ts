@@ -1,18 +1,9 @@
 import { PostMeta } from "#types/meta";
+import { SearchOptions, SearchResult } from "#types/search";
 import { Search } from "@wxn0brp/vql/vql";
 import Fuse from "fuse.js";
-import db from "./db.init";
+import { db } from "./db.init";
 import { getMdList } from "./md.mgr";
-
-export interface SearchOptions {
-    name?: string;
-    tags?: string[];
-    _id?: string;
-    id?: string;
-    limit?: number;
-}
-
-export type SearchResult = Pick<PostMeta, "tags" | "name" | "_id">;
 
 function mapPost(post: PostMeta): SearchResult {
     return {
@@ -24,7 +15,10 @@ function mapPost(post: PostMeta): SearchResult {
 
 export async function performSearch(searchOptions: SearchOptions): Promise<SearchResult[]> {
     if (searchOptions._id || searchOptions.id) {
-        const post = await db.meta.findOne<SearchResult>("md", { _id: searchOptions._id || searchOptions.id }, { select: ["name", "tags", "_id"] });
+        const post = await db.meta.md.findOne(
+            { _id: searchOptions._id || searchOptions.id },
+            { select: ["name", "tags", "_id"] }
+        );
         return post ? [post] : [];
     }
 

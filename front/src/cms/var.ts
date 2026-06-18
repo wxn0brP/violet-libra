@@ -1,5 +1,5 @@
 import EasyMDE from "easymde";
-import createListController from "../utils/list";
+import { createListController } from "../utils/list";
 
 export const sidebar = qs("#sidebar");
 
@@ -16,8 +16,9 @@ export const nameSelect = sidebar.qs<HTMLSelectElement>("name-select", 1);
 export const descriptionInput = sidebar.qi("description", 1);
 export const privateCheckbox = sidebar.qi("private", 1);
 export const scheduledInput = sidebar.qi("scheduled", 1);
+export const statusLabel = sidebar.qs("status", 1);
 
 export const tagList = createListController(tagsListUl, {
     type: "mixed",
-    options: ["tag1", "tag2", "tag3"],
+    options: [],
 });

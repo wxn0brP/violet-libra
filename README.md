@@ -2,18 +2,6 @@
 
 A simple, lightweight CMS/blogging platform built with Bun, TypeScript, and a custom VQL API.
 
-## ⚠️ Project Status: MVP / Work in Progress ⚠️
-
-This project is currently a Minimum Viable Product (MVP) and a work in progress. It is intended as a proof of concept and is not yet ready for production use. Features may be incomplete or subject to change.
-
-## Tech Stack
-
-*   **Backend:** TypeScript, Bun, [@wxn0brp/falcon-frame](https://www.npmjs.com/package/@wxn0brp/falcon-frame)
-*   **API:** [@wxn0brp/vql](https://www.npmjs.com/package/@wxn0brp/vql) (a custom GraphQL-like implementation)
-*   **Frontend (CMS):** TypeScript, esbuild, Yarn, [@wxn0brp/flanker-ui](https://www.npmjs.com/package/@wxn0brp/flanker-ui), EasyMDE
-*   **Authentication:** JWT-based authentication with [@wxn0brp/gate-warden](https://www.npmjs.com/package/@wxn0brp/gate-warden)
-*   **Development:** `suglite` for watching files and running commands.
-
 ## Getting Started
 
 ### Prerequisites
@@ -25,12 +13,11 @@ This project is currently a Minimum Viable Product (MVP) and a work in progress.
 ```bash
 bun run install:all
 bun run build:front
+
 cp .env.example .env
 nano .env
-bun run src/config.ts
-nano data/system/config/1.db
-bun run src/setupDB.ts
-nano data/access/usr/1.db
+
+./admin.sh setup admin "password-change-me"
 ```
 
 ### Running
@@ -40,3 +27,26 @@ bun run src/index.ts
 ```
 
 The application will be available at `http://localhost:15987`.
+
+## Admin Scripts
+
+### Manage configuration
+
+```bash
+./admin.sh config
+./admin.sh config app.name
+./admin.sh config app.name "My Blog"
+```
+
+### Manage users
+
+```bash
+./admin.sh user
+./admin.sh user add editor "secret" --admin
+./admin.sh user password editor "new-secret"
+./admin.sh user admin editor
+```
+
+## License
+
+MIT

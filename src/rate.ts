@@ -3,6 +3,7 @@ import { createRateLimiterPlugin } from "@wxn0brp/falcon-frame-plugin/plugins/ra
 
 const count = await cfg.get("rate.count");
 const per = await cfg.get("rate.per");
+
 export const rateLimit = createRateLimiterPlugin({
     maxRequests: Number(count),
     windowMs: Number(per),

@@ -1,4 +1,5 @@
 import { RssItem } from "#types/rss";
+import { escapeXml } from "#utils";
 
 /**
  * Generates an XML RSS feed conforming to RSS 2.0 specification
@@ -39,16 +40,4 @@ export function generateRssXml(items: RssItem[], title: string, description: str
 </rss>`;
 
     return rssXml;
-}
-
-/**
- * Escapes XML special characters except within CDATA
- */
-function escapeXml(str: string): string {
-    return (str ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
 }

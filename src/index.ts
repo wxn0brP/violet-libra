@@ -4,7 +4,12 @@ import FalconFrame from "@wxn0brp/falcon-frame";
 import { FF_VQL } from "@wxn0brp/vql";
 import { getUser } from "./api/utils/getUser";
 import VQL from "./api/vql";
-import router from "./router";
+import { router } from "./router";
+
+if (!process.env.JWT_SECRET) {
+    console.error("env 'JWT_SECRET' not configured");
+    process.exit(1);
+}
 
 const app = new FalconFrame();
 
@@ -12,6 +17,7 @@ app.setVar("views", "public/dynamic");
 const pageName = await cfg.get("app.name");
 app.setVar("render data", {
     page: pageName || "VIOLET LIBRA",
+    year: new Date().getFullYear(),
 });
 
 app.static("public/static");

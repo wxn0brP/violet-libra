@@ -1,6 +1,7 @@
-import db from "#mgr/db.init";
+import { db } from "#mgr/db.init";
+import { CfgKey } from "#types/config";
 
-const configDefaults = [
+const configDefaults: Array<{ _: CfgKey, v: string }> = [
     { _: "app.name", v: "VIOLET LIBRA" },
 
     { _: "rate.count", v: "30" },
@@ -8,16 +9,14 @@ const configDefaults = [
 ] as const;
 
 for (const { _: k, v } of configDefaults) {
-    await db.system.updateOneOrAdd("config", { k }, {}, { add_arg: { k, v }, id_gen: false });
+    await db.system.config.updateOneOrAdd({ k }, {}, { add_arg: { k, v }, id_gen: false });
 }
-
-export type CfgKey = typeof configDefaults[number]["_"];
 
 export const cfg = {
     get(k: CfgKey): Promise<string> {
-        return db.system.findOne<{ v: string }>("config", { k }).then(r => r?.v);
+        return db.system.config.findOne({ k }).then((r: { v: string }) => r?.v);
     },
     set(k: CfgKey, v: string) {
-        return db.system.updateOneOrAdd("config", { k }, { v });
+        return db.system.config.updateOneOrAdd({ k }, { v });
     },
 }

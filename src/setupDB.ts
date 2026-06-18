@@ -1,42 +1,30 @@
-import db from "#mgr/db.init";
-import { genId } from "@wxn0brp/db";
+import { db } from "#mgr/db.init";
+import { UserManager, WardenManager } from "@wxn0brp/gate-warden";
+
+const warden = new WardenManager(db.access);
+const gwUsers = new UserManager(db.access);
 
 // violet libra users
-let admin = await db.access.findOne<{ _id: string }>("usr", { _r: "root" });
+const admin = await db.access.usr.findOne({ _r: true });
 if (!admin) {
-    admin = await db.access.add("usr", { login: genId(), pass: "", _r: "root" });
-    console.log("check ./data/access/usr/1.db");
+    console.error("Root user not found");
+    process.exit(1);
 }
 
-// GW role
-let adminRole = await db.access.findOne<{ _id: string }>("roles", { name: "admin" });
-if (!adminRole)
-    adminRole = await db.access.add("roles", { name: "admin" });
+const adminRoleId = await ensureAdminRole();
 
-// GW user
-await db.access.updateOneOrAdd(
-    "users",
-    {
-        _id: admin._id
-    },
-    {},
-    {
-        add_arg: {
-            roles: [adminRole._id]
-        }
-    }
-);
+if (!await gwUsers.getUser(admin._id))
+    await gwUsers.createUser({ _id: admin._id });
 
-// GW/VQL permissions
-await db.access.updateOneOrAdd(
-    "role/" + adminRole._id,
-    {
-        _id: "api-cms-admin"
-    },
-    {},
-    {
-        add_arg: {
-            p: 0b11111111
-        }
-    }
-);
+await gwUsers.addRoleToUser(admin._id, adminRoleId);
+await warden.removeRBACRule(adminRoleId, "api-cms-admin").catch(() => null);
+await warden.addRBACRule(adminRoleId, "api-cms-admin", 0b11111111);
+
+async function ensureAdminRole() {
+    const existing = await warden.changeRoleNameToId("admin").catch(() => null);
+    if (existing)
+        return existing;
+
+    const role = await warden.addRole({ name: "admin" });
+    return role._id;
+}
