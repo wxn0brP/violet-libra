@@ -12,7 +12,7 @@
 	"dependencies": {
 		"@wxn0brp/flanker-dialog": "^0.1.0",
 		"@wxn0brp/flanker-ui": "^0.5.1",
-		"@wxn0brp/vql-client": "^0.2.13",
+		"@wxn0brp/vql-client": "^0.3.0",
 		"easymde": "^2.21.0",
 		"esbuild": "^0.28",
 		"esbuild-style-plugin": "^1",
