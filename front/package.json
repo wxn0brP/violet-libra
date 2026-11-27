@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"@wxn0brp/flanker-dialog": "^0.1.0",
-		"@wxn0brp/flanker-ui": "^0.5.1",
+		"@wxn0brp/flanker-ui": "^0.6.0",
 		"@wxn0brp/vql-client": "^0.2.13",
 		"easymde": "^2.21.0",
 		"esbuild": "^0.28",
